@@ -1,34 +1,35 @@
 class Mastermind
-    attr_accessor :player1, :player2, :board, :answer, :guess, :rounds
+    attr_accessor :player1, :player2, :board, :rounds
     def initialize(player1,player2,board)
         self.player1=player1
         self.player2=player2
         self.board=board
-        self.rounds=4
+        self.rounds=12
     end
 
     def correct_answer?
-        answer==guess
+        player1.answer==player2.guess
     end
 
     def play()
-        self.answer= player2.make_pattern
-        puts "#{player2.name} player has chosen a pattern"
-        p answer
-        sleep(2)
+        player1.answer= player1.make_pattern
+        puts "#{player1.name} player has chosen a pattern"
+        #p player1.answer
+        sleep(1)
         (1..rounds).each do |round|
-            puts "Make guess #{round} of 4."
-            self.guess= player1.make_guess
+            puts "Make guess #{round} of 12."
+            player2.guess= player2.make_guess
+            p player1.give_feedback(player2.guess)
             unless self.correct_answer?
                 sleep(1)
                 puts "Wrong guess. Try again"
+                player1.feedback=[]
                 sleep(1)
                 next
             end
             puts "CONGRATULATIONS!! Your guess was RIGHT."
             break
         end
-        p guess
     end
 end
 
