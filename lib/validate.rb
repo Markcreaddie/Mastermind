@@ -1,5 +1,6 @@
 module Validate
     def validate_numbers_in_correct_order(answer,guess)
+        self.feedback=[]
         unvalidated=[]
         wrong_order=[]
         (0...answer.length).each do |i|
@@ -29,4 +30,3 @@ module Validate
         missing.each{|number| feedback.push("e")}
     end
 end
-
