@@ -36,7 +36,7 @@ class HumanPlayer<Player
         end
         pattern
     end
-    def make_guess()
+    def make_guess(feedback)
         self.make_pattern()
     end
 
