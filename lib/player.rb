@@ -12,7 +12,7 @@ class Player
         unvalidated,wrong_order=self.validate_numbers_in_correct_order(answer,guess)
         missing=self.validate_existing_numbers(unvalidated,wrong_order)
         self.validate_missing_numbers(missing)
-        feedback
+        p feedback
     end
 
 end
