@@ -30,10 +30,20 @@ class ComputerPlayer<Player
             starting_num.quantity+=feedback.count("c")
             self.second_num=ValidNumber.new(starting_num.id+1)
             return self.insert_second_num(starting_num,second_num)
-        when feedback.count("c")==starting_num.quantity && !feedback.include?("w")
+        when (feedback.count("c")==starting_num.quantity && !feedback.include?("w")) ||
+            (feedback.count("w")==starting_num.quantity && !feedback.include?("c"))
             self.second_num.id+=1
             return self.insert_second_num(starting_num,second_num)
-
+        when feedback.count("c")==2 && feedback.count("w")==2 && starting_num.quantity == 1
+            self.starting_num.unvisited_positions.delete_at(0)
+            guess=Array.new(4,nil)
+            guess[starting_num.unvisited_positions[0]]=starting_num.id
+            return guess.map{|num| num== nil ? self.second_num.id : num}
+        when (feedback.count("c")<starting_num.quantity && feedback.include?("e"))
+            self.second_num.id+=1
+            return self.insert_second_num(starting_num,second_num)
+        when feedback.count("c")==2 && feedback.count("w")==2 && starting_num.quantity == 2
+            return pair_of_two_nums(self.guess,self.starting_num,self.second_num)
         end
     end
 
