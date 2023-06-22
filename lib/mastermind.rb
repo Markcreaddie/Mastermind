@@ -4,7 +4,7 @@ class Mastermind
         self.player1=player1
         self.player2=player2
         self.board=board
-        self.rounds=8
+        self.rounds=12
     end
 
     def correct_answer?
